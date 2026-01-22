@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tez format</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f5f5;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            width: 100%;
+        }
+
+        h1 {
+            text-align: center;
+            color: #1a1a1a;
+            margin-bottom: 40px;
+            font-size: 2.5rem;
+        }
+
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            padding: 20px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            transition: box-shadow 0.3s ease;
+            border: 1px solid #e5e5e5;
+        }
+
+        .card:hover {
+            box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+        }
+
+        .card h3 {
+            color: #1a1a1a;
+            font-size: 1.4rem;
+            margin-bottom: 12px;
+        }
+
+        .card p {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            font-size: 0.95rem;
+        }
+
+        .btn {
+            display: inline-block;
+            background: #1a1a1a;
+            color: white;
+            padding: 10px 24px;
+            border-radius: 6px;
+            text-decoration: none;
+            transition: background 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .btn:hover {
+            background: #333;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            .cards-grid {
+                grid-template-columns: 1fr;
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Xizmatlarimiz</h1>
+        <div class="cards-grid">
+            <div class="card">
+                <h3>Panjara format</h3>
+                <p> <b>STANDART FORMAT</b>
+            </br>Choose the appropriate synonym to the underlined word cure.
+            </br>====
+            </br>#treat
+            </br>====
+            </br>care
+            </br>====
+            </br>call
+            </br>====
+            </br>healthy
+            </br>+++++</p>
+                <a href="panjara" class="btn">Kirish</a>
+            </div>
+
+            <div class="card">
+                <h3>Mobil Ilovalar</h3>
+                <p>Android va iOS uchun innovatsion mobil ilovalar ishlab chiqamiz. Yuqori sifat va tezkor ishlash kafolati.</p>
+                <a href="#" class="btn">Kirish</a>
+            </div>
+
+            <div class="card">
+                <h3>SEO Xizmati</h3>
+                <p>Saytingizni qidiruv tizimlarida yuqori o'rinlarga chiqaramiz. Ko'proq mijozlar va daromad.</p>
+                <a href="#" class="btn">Kirish</a>
+            </div>
+
+            <div class="card">
+                <h3>Marketing</h3>
+                <p>Raqamli marketing strategiyalari orqali biznesingizni rivojlantiramiz. Maqsadli auditoriya va natijalar.</p>
+                <a href="#" class="btn">Kirish</a>
+            </div>
+
+            <div class="card">
+                <h3>Konsalting</h3>
+                <p>IT sohasida professional maslahatlar beramiz. Biznesingiz uchun eng yaxshi yechimlarni topamiz.</p>
+                <a href="#" class="btn">Kirish</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
