@@ -1,0 +1,1586 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Segment umumiy</title>
+    
+    <!-- Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <style>
+        /* Global stil */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e8ecf1 100%);
+            color: #2c3e50;
+            padding: 20px;
+            min-height: 100vh;
+            line-height: 1.6;
+            letter-spacing: -0.01em;
+        }
+
+        .container {
+            max-width: 900px;
+            background: white;
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        h1 {
+            text-align: center;
+            font-weight: 700;
+            color: #4D6CFA;
+            margin-bottom: 30px;
+            font-size: 2.2rem;
+            letter-spacing: -0.02em;
+            line-height: 1.2;
+        }
+
+        /* Funksiyalar bo'limi */
+        .features-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 16px;
+            margin: 25px 0;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+            padding: 20px;
+            background: #f8f9fb;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .feature-item:hover {
+            background: white;
+            transform: translateY(-3px);
+            border-color: #4D6CFA;
+            box-shadow: 0 6px 16px rgba(77, 108, 250, 0.15);
+        }
+
+        .feature-icon {
+            min-width: 44px;
+            text-align: center;
+        }
+
+        .feature-icon svg {
+            width: 40px;
+            height: 40px;
+            stroke: #4D6CFA;
+            filter: drop-shadow(0 2px 6px rgba(77, 108, 250, 0.2));
+        }
+
+        .feature-text {
+            flex: 1;
+        }
+
+        .feature-text strong {
+            display: block;
+            color: #2c3e50;
+            margin-bottom: 6px;
+            font-size: 15px;
+            font-weight: 600;
+            letter-spacing: -0.01em;
+            line-height: 1.4;
+        }
+
+        .feature-text p {
+            margin: 0;
+            font-size: 14px;
+            color: #64748b;
+            line-height: 1.6;
+            letter-spacing: 0;
+        }
+
+        /* Fayl yuklash */
+        .upload-container {
+            margin: 25px 0;
+            padding: 30px;
+            border: 2px dashed #cbd5e0;
+            border-radius: 12px;
+            text-align: center;
+            background: #f8f9fb;
+            transition: all 0.3s;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .upload-container.drag-over {
+            background: #e0e7ff;
+            border-color: #4D6CFA;
+            transform: scale(1.01);
+        }
+
+        .upload-container:hover {
+            background: white;
+            border-color: #4D6CFA;
+            transform: scale(1.01);
+        }
+
+        .upload-container h2 {
+            color: #2c3e50;
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            font-weight: 600;
+            letter-spacing: -0.01em;
+        }
+
+        .upload-container p {
+            color: #64748b;
+            font-size: 15px;
+            line-height: 1.6;
+        }
+
+        .format-example {
+            text-align: left;
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #4D6CFA;
+            margin-top: 15px;
+        }
+
+        .format-example b {
+            color: #4D6CFA;
+        }
+
+        .download-sample-container {
+            background: #f0f9ff;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 15px;
+            border: 1px solid #bae6fd;
+        }
+
+        .sample-description {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            color: #075985;
+            font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .sample-description svg {
+            width: 20px;
+            height: 20px;
+            stroke: #4D6CFA;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .btn-sample {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: #4D6CFA;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s;
+            cursor: pointer;
+            font-size: 14px;
+            width: 100%;
+            justify-content: center;
+        }
+
+        .btn-sample:hover {
+            background: #3d5ce8;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(14, 165, 233, 0.3);
+        }
+
+        .btn-sample svg {
+            width: 20px;
+            height: 20px;
+            stroke: white;
+            fill: none;
+            flex-shrink: 0;
+        }
+
+        .file-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 14px 32px;
+            background: #4D6CFA;
+            color: white;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+            margin-top: 15px;
+        }
+
+        .file-label:hover {
+            background: #3d5ce8;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(77, 108, 250, 0.3);
+        }
+
+        .file-label svg {
+            width: 20px;
+            height: 20px;
+            stroke: white;
+            fill: none;
+            flex-shrink: 0;
+        }
+
+        /* Test qutisi */
+        .test-container {
+            background: #f8f9fb;
+            padding: 20px;
+            margin-bottom: 16px;
+            border-radius: 12px;
+            border-left: 4px solid #4D6CFA;
+        }
+
+        .test-number {
+            font-size: 14px;
+            color: #4D6CFA;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .test-question {
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: #2c3e50;
+            font-size: 15px;
+            line-height: 1.6;
+            letter-spacing: -0.01em;
+        }
+
+        .test-options {
+            margin-left: 20px;
+            color: #475569;
+            font-size: 14px;
+            line-height: 1.7;
+        }
+
+        .test-options div {
+            margin: 6px 0;
+        }
+
+        .test-answer {
+            margin-top: 12px;
+            font-weight: 600;
+            color: #10b981;
+            padding: 8px 12px;
+            background: #ecfdf5;
+            border-radius: 6px;
+            display: inline-block;
+        }
+
+        /* Corrections section */
+        .corrections-container {
+            background: #fffbeb;
+            border: 2px solid #fcd34d;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .corrections-title {
+            color: #d97706;
+            font-weight: 700;
+            margin-bottom: 15px;
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .corrections-title svg {
+            width: 24px;
+            height: 24px;
+            stroke: #d97706;
+        }
+
+        .correction-item {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 12px;
+            border-left: 3px solid #fbbf24;
+        }
+
+        .correction-label {
+            font-weight: 600;
+            color: #92400e;
+            font-size: 14px;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .correction-label::before {
+            content: "•";
+            color: #f59e0b;
+            font-size: 20px;
+        }
+
+        .correction-text {
+            color: #475569;
+            font-size: 14px;
+            line-height: 1.7;
+            padding-left: 16px;
+        }
+
+        .correction-text strong {
+            color: #1f2937;
+            font-weight: 600;
+        }
+
+        /* Export buttons */
+        .btn-export {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: #4D6CFA;
+            color: white;
+            border: none;
+            padding: 12px 28px;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s;
+            margin: 10px;
+            min-width: 280px;
+            white-space: nowrap;
+            justify-content: center;
+            cursor: pointer;
+        }
+
+        .btn-export:hover {
+            background: #3d5ce8;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(77, 108, 250, 0.3);
+        }
+
+        .btn-export svg {
+            width: 20px;
+            height: 20px;
+            stroke: white;
+            fill: none;
+            flex-shrink: 0;
+        }
+
+        .btn-corrections {
+            background: #f59e0b;
+            color: white;
+            min-width: 280px;
+        }
+
+        .btn-corrections:hover {
+            background: #d97706;
+        }
+
+        .buttons-container {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        /* Upload status */
+        #uploadStatus {
+            margin-top: 15px;
+        }
+
+        #uploadStatus > div {
+            margin-bottom: 8px;
+        }
+
+        #uploadStatus > div:last-child {
+            margin-bottom: 0;
+        }
+
+        .alert-info {
+            background: #dbeafe;
+            color: #1e40af;
+            border: 1px solid #93c5fd;
+            padding: 12px 16px;
+            border-radius: 8px;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            font-size: 14px;
+            line-height: 1.6;
+            margin-top: 8px;
+        }
+
+        .alert-info svg {
+            width: 20px;
+            height: 20px;
+            stroke: #1e40af;
+            flex-shrink: 0;
+        }
+
+        .alert-success {
+            background: #d1fae5;
+            color: #065f46;
+            border: 1px solid #6ee7b7;
+            padding: 12px 16px;
+            border-radius: 8px;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .alert-success svg {
+            width: 20px;
+            height: 20px;
+            stroke: #065f46;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .alert-warning {
+            background: #fef3c7;
+            color: #92400e;
+            border: 1px solid #fcd34d;
+            padding: 12px 16px;
+            border-radius: 8px;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            font-size: 14px;
+            line-height: 1.6;
+            margin-top: 8px;
+        }
+
+        .alert-warning svg {
+            width: 20px;
+            height: 20px;
+            stroke: #92400e;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .alert-danger {
+            background: #fee2e2;
+            color: #991b1b;
+            border: 1px solid #fca5a5;
+            padding: 12px 16px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .alert-danger svg {
+            width: 20px;
+            height: 20px;
+            stroke: #991b1b;
+            flex-shrink: 0;
+        }
+
+        .telegram-warning {
+            background: #fee2e2;
+            color: #991b1b;
+            border: 1px solid #fca5a5;
+            padding: 12px 16px;
+            border-radius: 8px;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin-top: 15px;
+            font-weight: 600;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .telegram-warning svg {
+            width: 20px;
+            height: 20px;
+            stroke: #991b1b;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .float-button {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background-color: #4D6CFA;
+        border: none;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 4px 12px rgba(77, 108, 250, 0.3);
+        cursor: pointer;
+        transition-duration: 0.3s;
+        overflow: hidden;
+        position: fixed;
+        right: 30px;
+        z-index: 99;
+        opacity: 0;
+        visibility: hidden;
+        }
+
+        .float-button.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .float-button .svgIcon {
+            width: 12px;
+            transition-duration: 0.3s;
+        }
+
+        .float-button .svgIcon path {
+            fill: white;
+        }
+
+        .float-button:hover {
+            width: 160px;
+            border-radius: 50px;
+            background-color: #3d5ce8;
+        }
+
+        .float-button:hover .svgIcon {
+            transform: translateY(-200%);
+        }
+
+        .float-button::before {
+            position: absolute;
+            bottom: -20px;
+            color: white;
+            font-size: 0;
+            font-weight: 600;
+            transition-duration: 0.3s;
+        }
+
+        .float-button:hover::before {
+            font-size: 13px;
+            opacity: 1;
+            bottom: unset;
+        }
+
+        #backToTopBtn {
+            bottom: 30px;
+        }
+
+        #backToTopBtn::before {
+            content: "Yuqorga qaytish";
+        }
+
+        #scrollToBottomBtn {
+            bottom: 90px;
+        }
+
+        #scrollToBottomBtn::before {
+            content: "Pastga tushish";
+        }
+
+        @media screen and (max-width: 768px) {
+            .float-button { right: 20px; }
+            #backToTopBtn { bottom: 20px; }
+            #scrollToBottomBtn { bottom: 80px; }
+        }
+
+        @media screen and (max-width: 480px) {
+            .float-button { width: 45px; height: 45px; right: 15px; }
+            #backToTopBtn { bottom: 15px; }
+            #scrollToBottomBtn { bottom: 70px; }
+            .float-button:hover { width: 130px; }
+        }
+
+        /* Responsive styles */
+        @media screen and (max-width: 768px) {            
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            .btn-export {
+                min-width: 240px;
+                padding: 12px 20px;
+                font-size: 14px;
+            }
+
+            .file-label {
+                padding: 12px 24px;
+                font-size: 14px;
+            }
+
+            .btn-sample {
+                padding: 10px 20px;
+                font-size: 13px;
+            }
+            /* Bu qatorlarni 768px media query ichiga qo'shing */
+            .modal {
+                width: 95%;
+            }
+
+            .modal-header {
+                padding: 20px 24px;
+            }
+
+            .modal-header h3 {
+                font-size: 18px;
+            }
+
+            .modal-body {
+                padding: 24px;
+            }
+
+            .modal-footer {
+                padding: 0 24px 24px;
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            .back-to-top {
+                bottom: 15px;
+                right: 15px;
+                width: 45px;
+                height: 45px;
+            }
+            
+            .container {
+                padding: 20px;
+            }
+
+            .btn-export {
+                min-width: 100%;
+                margin: 8px 0;
+            }
+
+            .file-label {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .btn-sample {
+                width: 100%;
+                padding: 10px 16px;
+                font-size: 13px;
+            }
+
+            .sample-description {
+                font-size: 13px;
+            }
+        /* Bu qatorlarni 480px media query ichiga qo'shing */
+        .modal {
+            width: 95%;
+            max-width: none;
+        }
+
+        .modal-header {
+            padding: 18px 20px;
+        }
+
+        .modal-header svg {
+            width: 24px;
+            height: 24px;
+        }
+
+        .modal-header h3 {
+            font-size: 17px;
+        }
+
+        .modal-body {
+            padding: 20px;
+        }
+
+        .modal-footer {
+            padding: 0 20px 20px;
+            flex-direction: column;
+        }
+
+        .modal-btn {
+            padding: 12px 20px;
+            font-size: 14px;
+        }    
+        }
+         /* Modal overlay */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(8px);
+            z-index: 1000;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Modal */
+        .custom-modal {
+            background: white;
+            border-radius: 16px;
+            padding: 0;
+            max-width: 480px;
+            width: 100%;
+            box-shadow: 0 25px 80px rgba(0, 0, 0, 0.35);
+        }
+
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(30px) scale(0.95);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0) scale(1);
+                opacity: 1;
+            }
+        }
+
+        .modal-header {
+            background: linear-gradient(135deg, #4D6CFA 0%, #3d5ce8 100%);
+            padding: 24px 28px;
+            color: white;
+        }
+
+        .modal-header h3 {
+            margin: 0;
+            font-size: 20px;
+            font-weight: 700;
+            letter-spacing: -0.01em;
+        }
+
+        .modal-body {
+            padding: 28px;
+        }
+
+        .modal-info-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 14px 18px;
+            background: #f8f9fb;
+            border-radius: 10px;
+            margin-bottom: 12px;
+            border: 2px solid #e2e8f0;
+        }
+
+        .modal-info-label {
+            font-size: 14px;
+            color: #64748b;
+            font-weight: 600;
+        }
+
+        .modal-info-value {
+            font-size: 15px;
+            color: #2c3e50;
+            font-weight: 700;
+        }
+
+        .test-count-value {
+            background: linear-gradient(135deg, #4D6CFA 0%, #3d5ce8 100%);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 8px;
+            font-size: 14px;
+        }
+
+        .modal-form-group {
+            margin-top: 20px;
+            margin-bottom: 24px;
+        }
+
+        .modal-label {
+            display: block;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-size: 15px;
+        }
+
+        .modal-input {
+            width: 100%;
+            padding: 14px 16px;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            font-size: 15px;
+            transition: all 0.3s;
+            font-family: inherit;
+            box-sizing: border-box;
+            background: #f8f9fb;
+            font-weight: 500;
+        }
+
+        .modal-input:focus {
+            outline: none;
+            border-color: #4D6CFA;
+            background: white;
+            box-shadow: 0 0 0 4px rgba(77, 108, 250, 0.08);
+        }
+
+        .modal-input::placeholder {
+            color: #94a3b8;
+            font-weight: 400;
+        }
+
+        .modal-suggestion {
+            background: #f0f9ff;
+            border: 2px solid #bae6fd;
+            border-radius: 10px;
+            padding: 14px 16px;
+            margin-top: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 14px;
+            color: #075985;
+            font-weight: 600;
+        }
+
+        .modal-suggestion svg {
+            width: 20px;
+            height: 20px;
+            stroke: #0284c7;
+            flex-shrink: 0;
+        }
+
+        .modal-footer {
+            display: flex;
+            gap: 12px;
+            padding: 0 28px 28px;
+        }
+
+        .modal-btn {
+            flex: 1;
+            padding: 14px 20px;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 15px;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .modal-btn svg {
+            width: 20px;
+            height: 20px;
+            flex-shrink: 0;
+        }
+
+        .modal-btn-cancel {
+            background: #f1f5f9;
+            color: #475569;
+        }
+
+        .modal-btn-cancel svg {
+            stroke: #475569;
+        }
+
+        .modal-btn-cancel:hover {
+            background: #e2e8f0;
+            transform: translateY(-2px);
+        }
+
+        .modal-btn-confirm {
+            background: linear-gradient(135deg, #4D6CFA 0%, #3d5ce8 100%);
+            color: white;
+            box-shadow: 0 4px 12px rgba(77, 108, 250, 0.3);
+        }
+
+        .modal-btn-confirm svg {
+            stroke: white;
+            fill: none;
+        }
+
+        .modal-btn-confirm:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(77, 108, 250, 0.4);
+        }
+
+        .modal-btn-confirm:disabled {
+            background: #cbd5e0;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* Responsive */
+        @media screen and (max-width: 768px) {
+            .modal {
+                max-width: 95%;
+            }
+
+            .modal-header {
+                padding: 22px 24px;
+            }
+
+            .modal-body {
+                padding: 24px;
+            }
+
+            .modal-footer {
+                padding: 0 24px 24px;
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            .modal-header h3 {
+                font-size: 18px;
+            }
+
+            .modal-footer {
+                flex-direction: column;
+            }
+
+            .modal-btn {
+                padding: 13px 18px;
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+    <h1>Segment umumiy</h1>
+    <p style="text-align: center;"> Testlarni formatlash tizimi</p>
+    <!-- Funksiyalar haqida ma'lumot -->
+    <div class="features-container">
+        <div class="feature-item">
+            <div class="feature-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/>
+                    <path d="M9 12h6m-6 4h6"/>
+                </svg>
+            </div>
+            <div class="feature-text">
+                <strong>Tartib raqamlarni olib tashlash</strong>
+                <p>Test boshidagi 1. 2. 10. kabi raqamlar avtomatik tozalanadi</p>
+            </div>
+        </div>
+        <div class="feature-item">
+            <div class="feature-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="3"/>
+                    <path d="M12 1v6m0 6v6m8.66-15.66l-4.24 4.24M9.17 14.83l-4.24 4.24m12.73 0l-4.24-4.24M9.17 9.17L4.93 4.93"/>
+                </svg>
+            </div>
+            <div class="feature-text">
+                <strong>Format tuzatish</strong>
+                <p>A) dan A. ga, ANSWER: formatini standartlashtiradi</p>
+            </div>
+        </div>
+        <div class="feature-item">
+            <div class="feature-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M9 11l3 3L22 4"/>
+                    <path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/>
+                </svg>
+            </div>
+            <div class="feature-text">
+                <strong>Xatoliklarni aniqlash</strong>
+                <p>Fayl formatidagi muammolarni topib, ularni tuzatadi</p>
+            </div>
+        </div>
+        <div class="feature-item">
+            <div class="feature-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                    <path d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+                </svg>
+            </div>
+            <div class="feature-text">
+                <strong>Namuna ko'rsatish</strong>
+                <p>Dastlabki 5 ta test namuna sifatida ekranda ko'rsatiladi</p>
+            </div>
+        </div>
+        <div class="feature-item">
+            <div class="feature-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/>
+                    <polyline points="7 10 12 15 17 10"/>
+                    <line x1="12" y1="15" x2="12" y2="3"/>
+                </svg>
+            </div>
+            <div class="feature-text">
+                <strong>Barcha testlarni yuklab olish</strong>
+                <p>Bir tugma bosish bilan barcha testlarni standart formatda yuklab olish</p>
+            </div>
+        </div>
+        <div class="feature-item">
+            <div class="feature-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                </svg>
+            </div>
+            <div class="feature-text">
+                <strong>Tez ishlash</strong>
+                <p>Barcha testlarni bir zumda tahlil qilish va formatlash</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="upload-container" id="uploadContainer">
+        <h2>Test faylini yuklang</h2>
+        
+        <div class="telegram-warning">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"/>
+                <line x1="12" y1="8" x2="12" y2="12"/>
+                <line x1="12" y1="16" x2="12.01" y2="16"/>
+            </svg>
+            <span>Agar Telegramdan kirsangiz, yuklab olish uchun Chrome brauzeridan foydalaning!</span>
+        </div>
+        
+        <div class="format-example">
+            <b>STANDART FORMAT</b>
+            <br>Qanday tarmoq turi Narsalar interneti komponentlari o'rtasidagi aloqa uchun ishlatiladi?
+            <br>A. LAN
+            <br>B. WAN 
+            <br>C. WLAN
+            <br>D. PAN 
+            <br>ANSWER: A  
+        </div>
+
+        <div class="download-sample-container">
+            <p class="sample-description">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"/>
+                    <line x1="12" y1="16" x2="12" y2="12"/>
+                    <line x1="12" y1="8" x2="12.01" y2="8"/>
+                </svg>
+                <span>Tezkor Quiz quyidagi formatdagi testlarni qo'llab-quvvatlaydi. Namuna testni yuklab oling va shunga mos test tuzing!</span>
+            </p>
+            <button id="downloadSampleBtn" class="btn-sample">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/>
+                    <polyline points="7 10 12 15 17 10"/>
+                    <line x1="12" y1="15" x2="12" y2="3"/>
+                </svg>
+                <span>Namuna testni yuklab olish (.txt)</span>
+            </button>
+        </div>
+     
+        <label for="fileInput" class="file-label">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/>
+                <polyline points="17 8 12 3 7 8"/>
+                <line x1="12" y1="3" x2="12" y2="15"/>
+            </svg>
+            <span>Fayl tanlash</span>
+        </label>
+        <input type="file" id="fileInput" accept=".txt" hidden>
+        <div id="uploadStatus"></div>
+    </div>
+
+    <div id="testResults" style="display: none;">
+        <div id="testContainer"></div>
+        <div id="moreTestsInfo" class="alert alert-info mt-3" style="display: none;"></div>
+        <div id="correctionsSection" style="display: none;"></div>
+        <div class="buttons-container">
+            <button id="showCorrectionsBtn" class="btn-export btn-corrections" style="display: none;">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/>
+                </svg>
+                <span>Tuzatishlarni ko'rsatish</span>
+            </button>
+            <button id="exportBtn" class="btn-export">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/>
+                    <polyline points="7 10 12 15 17 10"/>
+                    <line x1="12" y1="15" x2="12" y2="3"/>
+                </svg>
+                <span>Barcha testlarni yuklab olish</span>
+            </button>
+        </div>
+    </div>
+</div>
+
+    <!-- Modal -->
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="custom-modal">
+            <div class="modal-header">
+                <h3>Barcha testlarni yuklab olish</h3>
+            </div>
+
+            <div class="modal-body">
+                <!-- Test ma'lumotlari -->
+                <div class="modal-info-item">
+                    <span class="modal-info-label">Testlar soni:</span>
+                    <span class="test-count-value" id="modalTestCount">125</span>
+                </div>
+
+                <div class="modal-info-item">
+                    <span class="modal-info-label">Yuklangan fayl:</span>
+                    <span class="modal-info-value" id="modalFileName">testlar.txt</span>
+                </div>
+
+                <!-- Fayl nomi -->
+                <div class="modal-form-group">
+                    <label class="modal-label">Fayl nomi:</label>
+                    <input 
+                        type="text" 
+                        id="fileNameInput" 
+                        class="modal-input"
+                        placeholder="Masalan: Testlar_100ta"
+                    />
+                </div>
+
+                <!-- Tavsiya -->
+                <div class="modal-suggestion">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                    </svg>
+                    <span>Bu testlarni endi "Quiz" larga yuklang</span>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button class="modal-btn modal-btn-cancel" id="modalCancelBtn">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="18" y1="6" x2="6" y2="18"/>
+                        <line x1="6" y1="6" x2="18" y2="18"/>
+                    </svg>
+                    Bekor qilish
+                </button>
+                <button class="modal-btn modal-btn-confirm" id="modalConfirmBtn">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/>
+                        <polyline points="7 10 12 15 17 10"/>
+                        <line x1="12" y1="15" x2="12" y2="3"/>
+                    </svg>
+                    Yuklab olish
+                </button>
+            </div>
+        </div>
+    </div>
+
+<button class="float-button" id="backToTopBtn">
+    <svg class="svgIcon" viewBox="0 0 384 512">
+        <path d="M214.6 41.4c-12.5-12.5-32.8-12.5-45.3 0l-160 160c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L160 141.2V448c0 17.7 14.3 32 32 32s32-14.3 32-32V141.2L329.4 246.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3l-160-160z"></path>
+    </svg>
+</button>
+
+<button class="float-button" id="scrollToBottomBtn">
+    <svg class="svgIcon" viewBox="0 0 384 512">
+        <path d="M169.4 470.6c12.5 12.5 32.8 12.5 45.3 0l160-160c-12.5-12.5-12.5-32.8 0-45.3s-32.8-12.5-45.3 0L224 370.8V64c0-17.7-14.3-32-32-32s-32 14.3-32 32v306.7L54.6 265.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l160 160z"></path>
+    </svg>
+</button>
+
+<script>
+    // ======================== ELEMENTLAR ========================
+    let tests = [];
+    let corrections = [];
+
+    const fileInput = document.getElementById('fileInput');
+    const uploadStatus = document.getElementById('uploadStatus');
+    const testResults = document.getElementById('testResults');
+    const testContainer = document.getElementById('testContainer');
+    const exportBtn = document.getElementById('exportBtn');
+    const showCorrectionsBtn = document.getElementById('showCorrectionsBtn');
+    const correctionsSection = document.getElementById('correctionsSection');
+    const moreTestsInfo = document.getElementById('moreTestsInfo');
+    const uploadContainer = document.getElementById('uploadContainer');
+    const downloadSampleBtn = document.getElementById('downloadSampleBtn');
+
+    // Modal elementlari
+    const modalOverlay = document.getElementById('modalOverlay');
+    const modalTestCount = document.getElementById('modalTestCount');
+    const modalFileName = document.getElementById('modalFileName');
+    const fileNameInput = document.getElementById('fileNameInput');
+    const modalCancelBtn = document.getElementById('modalCancelBtn');
+    const modalConfirmBtn = document.getElementById('modalConfirmBtn');
+
+    // Tugmalar
+    const backToTopBtn = document.getElementById('backToTopBtn');
+    const scrollToBottomBtn = document.getElementById('scrollToBottomBtn');
+
+    // ======================== YORDAMCHI FUNKSIYALAR ========================
+    function formatOption(option) {
+        return option.replace(/^([A-D])\)/, '$1.');
+    }
+
+    function removeQuestionNumber(text) {
+        return text.replace(/^\d+\.\s*/, '');
+    }
+
+    function normalizeAnswer(answerLine) {
+        const match = answerLine.match(
+            /(ans|answer|ansver|javob|to['‘]?g['‘]?ri\s+javob|togri\s+javob|t['‘]?o['‘]?g['‘]?ri\s+javob)[\s:]*([A-Da-d])/i
+        );
+        if (match) return 'ANSWER: ' + match[2].toUpperCase();
+        return answerLine;
+    }
+
+    function normalizeText(text) {
+    return text
+        .replace(/<\/?(b|strong)>/gi, '')
+        .replace(/\*\*(.*?)\*\*/g, '$1')
+        .replace(/__(.*?)__/g, '$1')
+        .trim();
+    }
+
+
+    function readFileAsync(file) {
+        return new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.onload = e => resolve(e.target.result);
+            reader.onerror = () => reject(new Error('Fayl o‘qishda xatolik'));
+            reader.readAsText(file, 'UTF-8');
+        });
+    }
+
+    // ======================== MODAL (YANGI LOGIKA BILAN UCHASHTIRILGAN) ========================
+    function openModal() {
+        const now = new Date();
+        const isDemo = tests.length === 0;
+        const count = isDemo ? 125 : tests.length;
+
+        modalTestCount.textContent = count;
+        // modalFileName o'zgartirish shart emas — HTMLda statik qiymat bor
+
+        const defaultName = `Testlar_${count}ta_${now.getDate()}.${now.getMonth() + 1}.${now.getFullYear()}`;
+        fileNameInput.value = defaultName;
+
+        modalOverlay.classList.add('active');
+        setTimeout(() => {
+            fileNameInput.focus();
+            fileNameInput.select();
+        }, 100);
+    }
+
+    function closeModal() {
+        modalOverlay.classList.remove('active');
+        fileNameInput.value = '';
+    }
+
+    function downloadTests() {
+        const fileName = fileNameInput.value.trim();
+        if (!fileName) {
+            fileNameInput.style.borderColor = '#ef4444';
+            fileNameInput.focus();
+            setTimeout(() => fileNameInput.style.borderColor = '', 2000);
+            return;
+        }
+
+        if (tests.length === 0) {
+            // Demo holatida faqat alert (real yuklama yo'q)
+            alert(`Fayl yuklanmoqda: ${fileName}.txt`);
+        } else {
+            // Real testlar bor bo'lsa — haqiqiy yuklab olish
+            let content = '';
+            tests.forEach((test, i) => {
+                content += test.question + '\n';
+                test.options.forEach(opt => content += opt + '\n');
+                content += test.answer + '\n';
+                if (i < tests.length - 1) content += '\n';
+            });
+
+            const blob = new Blob([content], { type: 'text/plain;charset=utf-8' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `${fileName}.txt`;
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+
+        closeModal();
+    }
+
+    // ======================== PARSING VA KO‘RSATISH ========================
+    async function parseTestFile(content) {
+        tests = [];
+        corrections = [];
+
+        const blocks = content.split('++++').map(b => b.trim()).filter(Boolean);
+        let questionNumber = 1;
+
+        for (const block of blocks) {
+
+            const rawLines = block
+                .split('\n')
+                .map(l => normalizeText(l.trim()))
+                .filter(l => l && l !== '====');
+
+            if (rawLines.length < 2) continue;
+
+            const question = rawLines[0];
+            const options = [];
+            let correctIndexes = [];
+
+            for (let i = 1; i < rawLines.length; i++) {
+                let line = rawLines[i];
+
+                if (line.startsWith('#')) {
+                    const clean = line.substring(1).trim();
+                    correctIndexes.push(options.length);
+                    options.push(
+                        String.fromCharCode(65 + options.length) + '. ' + clean
+                    );
+                } else {
+                    options.push(
+                        String.fromCharCode(65 + options.length) + '. ' + line
+                    );
+                }
+            }
+
+            /* ====== VALIDATSIYA ====== */
+
+            if (correctIndexes.length !== 1) {
+                const reason =
+                    correctIndexes.length === 0
+                        ? 'Hech qaysi variant # bilan belgilanmagan'
+                        : 'Bir nechta variant # bilan belgilangan';
+
+                corrections.push({
+                    testNumber: questionNumber,
+                    type: 'Variant xatosi',
+                    original:
+                        `\n\n==================== ERROR ====================\n` +
+                        `Test ${questionNumber}\n` +
+                        `Savol: ${question}\n` +
+                        `Sabab: ${reason}\n` +
+                        `=============================================\n\n`,
+                    corrected:
+                        `To‘g‘ri format:\n` +
+                        `Faqat bitta variant # bilan belgilanishi kerak`
+                });
+
+                questionNumber++;
+                continue;
+            }
+
+            const answer =
+                'ANSWER: ' + String.fromCharCode(65 + correctIndexes[0]);
+
+            tests.push({
+                question,
+                options,
+                answer
+            });
+
+            questionNumber++;
+        }
+
+        await displayTests();
+    }
+
+    async function displayTests() {
+        testContainer.innerHTML = '';
+        const max = 5;
+        for (let i = 0; i < Math.min(max, tests.length); i++) {
+            const test = tests[i];
+            const div = document.createElement('div');
+            div.className = 'test-container';
+            div.innerHTML = `
+                <div class="test-number">Test ${i + 1}</div>
+                <div class="test-question">${test.question}</div>
+                <div class="test-options">${test.options.map(o => `<div>${o}</div>`).join('')}</div>
+                <div class="test-answer">${test.answer}</div>
+            `;
+            testContainer.appendChild(div);
+        }
+
+        if (tests.length > max) {
+            moreTestsInfo.style.display = 'flex';
+            moreTestsInfo.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg><span>Faqat dastlabki ${max} ta test ko'rsatilmoqda. Barcha ${tests.length} ta testni yuklab olish uchun tugmani bosing.</span>`;
+        } else {
+            moreTestsInfo.style.display = 'none';
+        }
+
+        showCorrectionsBtn.style.display = corrections.length > 0 ? 'inline-flex' : 'none';
+        testResults.style.display = 'block';
+        setTimeout(() => testResults.scrollIntoView({ behavior: 'smooth' }), 200);
+    }
+
+    async function displayTests() {
+        testContainer.innerHTML = '';
+        const max = 5;
+        for (let i = 0; i < Math.min(max, tests.length); i++) {
+            const test = tests[i];
+            const div = document.createElement('div');
+            div.className = 'test-container';
+            div.innerHTML = `
+                <div class="test-number">Test ${i + 1}</div>
+                <div class="test-question">${test.question}</div>
+                <div class="test-options">${test.options.map(o => `<div>${o}</div>`).join('')}</div>
+                <div class="test-answer">${test.answer}</div>
+            `;
+            testContainer.appendChild(div);
+        }
+
+        if (tests.length > max) {
+            moreTestsInfo.style.display = 'flex';
+            moreTestsInfo.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg><span>Faqat dastlabki ${max} ta test ko‘rsatilmoqda. Barcha ${tests.length} ta testni yuklab olish uchun tugmani bosing.</span>`;
+        } else {
+            moreTestsInfo.style.display = 'none';
+        }
+
+        showCorrectionsBtn.style.display = corrections.length > 0 ? 'inline-flex' : 'none';
+        testResults.style.display = 'block';
+        setTimeout(() => testResults.scrollIntoView({ behavior: 'smooth' }), 200);
+    }
+
+    function displayCorrections() {
+        correctionsSection.innerHTML = `<div class="corrections-container"><div class="corrections-title"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/></svg><span>Amalga oshirilgan tuzatishlar (${corrections.length} ta)</span></div></div>`;
+        corrections.forEach(c => {
+            const item = document.createElement('div');
+            item.className = 'correction-item';
+            item.innerHTML = `<div class="correction-label">Test ${c.testNumber} - ${c.type}</div><div class="correction-text"><strong>Asl:</strong> ${c.original}</div><div class="correction-text"><strong>Tuzatilgan:</strong> ${c.corrected}</div>`;
+            correctionsSection.querySelector('.corrections-container').appendChild(item);
+        });
+        correctionsSection.style.display = 'block';
+    }
+
+    // ======================== FAYL ISHLASH ========================
+    async function handleFile(file) {
+        try {
+            testResults.style.display = 'none';
+            tests = [];
+            corrections = [];
+
+            uploadStatus.innerHTML = `<div class="alert-warning"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v4m0 12v4M4.93 4.93l2.83 2.83m8.48 8.48l2.83 2.83M2 12h4m12 0h4M4.93 19.07l2.83-2.83m8.48-8.48l2.83-2.83"/></svg><span>Fayl o‘qilmoqda...</span></div>`;
+
+            const content = await readFileAsync(file);
+
+            uploadStatus.innerHTML = `<div class="alert-warning"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v4m0 12v4M4.93 4.93l2.83 2.83m8.48 8.48l2.83 2.83M2 12h4m12 0h4M4.93 19.07l2.83-2.83m8.48-8.48l2.83-2.83"/></svg><span>Testlar tahlil qilinmoqda...</span></div>`;
+
+            await parseTestFile(content);
+
+            uploadStatus.innerHTML = `<div class="alert-success"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg><span>${tests.length} ta test muvaffaqiyatli yuklandi!</span></div>`;
+
+            if (corrections.length > 0) {
+                const warn = document.createElement('div');
+                warn.className = 'alert-warning';
+                warn.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg><span>${corrections.length} ta o‘zgartirish amalga oshirildi.</span>`;
+                uploadStatus.appendChild(warn);
+            }
+
+            const info = document.createElement('div');
+            info.className = 'alert-info';
+            info.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg><span>Iltimos, testlarni tekshirib ko'ring - xatoliklar bo'lishi mumkin.</span>`;
+            uploadStatus.appendChild(info);
+
+        } catch (err) {
+            uploadStatus.innerHTML = `<div class="alert-danger"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg><span>Xatolik yuz berdi! Faylni qayta yuklang.</span></div>`;
+        }
+    }
+
+    // ======================== EVENT LISTENERLAR ========================
+    fileInput.addEventListener('change', e => {
+        const file = e.target.files[0];
+        if (file && file.name.endsWith('.txt')) handleFile(file);
+        else if (file) uploadStatus.innerHTML = `<div class="alert-danger"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg><span>Faqat .txt fayllar qabul qilinadi!</span></div>`;
+    });
+
+    uploadContainer.addEventListener('dragover', e => { e.preventDefault(); uploadContainer.classList.add('drag-over'); });
+    uploadContainer.addEventListener('dragleave', () => uploadContainer.classList.remove('drag-over'));
+    uploadContainer.addEventListener('drop', e => {
+        e.preventDefault();
+        uploadContainer.classList.remove('drag-over');
+        const file = e.dataTransfer.files[0];
+        if (file && file.name.endsWith('.txt')) handleFile(file);
+    });
+
+    uploadContainer.addEventListener('click', e => {
+        if (!e.target.closest('.alert-danger, .alert-success, .alert-warning, .alert-info, .telegram-warning, .format-example, .file-label, .download-sample-container, .btn-sample')) {
+            fileInput.click();
+        }
+    });
+
+    downloadSampleBtn.addEventListener('click', async e => {
+        e.stopPropagation();
+        try {
+            downloadSampleBtn.disabled = true;
+            downloadSampleBtn.innerHTML = `Yuklanmoqda...`;
+            const res = await fetch('https://tezkorquiz.uz/namuna_test.txt');
+            if (!res.ok) throw new Error();
+            const blob = await res.blob();
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'namuna_test.txt';
+            a.click();
+            URL.revokeObjectURL(url);
+            downloadSampleBtn.innerHTML = `Muvaffaqiyatli yuklandi!`;
+            setTimeout(() => {
+                downloadSampleBtn.disabled = false;
+                downloadSampleBtn.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg><span>Namuna testni yuklab olish (.txt)</span>`;
+            }, 2000);
+        } catch {
+            downloadSampleBtn.innerHTML = `Xatolik! Qayta urinib ko‘ring`;
+            setTimeout(() => {
+                downloadSampleBtn.disabled = false;
+                downloadSampleBtn.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg><span>Namuna testni yuklab olish (.txt)</span>`;
+            }, 2000);
+        }
+    });
+
+    showCorrectionsBtn.addEventListener('click', () => {
+        if (correctionsSection.style.display === 'none') {
+            displayCorrections();
+            showCorrectionsBtn.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="18 15 12 9 6 15"/></svg><span>Tuzatishlarni yashirish</span>`;
+        } else {
+            correctionsSection.style.display = 'none';
+            showCorrectionsBtn.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/></svg><span>Tuzatishlarni ko‘rsatish</span>`;
+        }
+    });
+
+    exportBtn.addEventListener('click', openModal);
+
+    // Modal eventlari (yangi logika)
+    modalCancelBtn.addEventListener('click', closeModal);
+    modalConfirmBtn.addEventListener('click', downloadTests);
+    modalOverlay.addEventListener('click', e => { if (e.target === modalOverlay) closeModal(); });
+    document.addEventListener('keydown', e => {
+        if (e.key === 'Escape' && modalOverlay.classList.contains('active')) closeModal();
+        if (e.key === 'Enter' && modalOverlay.classList.contains('active') && fileNameInput.value.trim()) downloadTests();
+    });
+
+    // ======================== YUQORIGA VA PASTGA TUGMALAR ========================
+    function updateFloatButtons() {
+        const scrolled = document.documentElement.scrollTop || document.body.scrollTop;
+        const totalHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        const nearBottom = 150;
+
+        scrolled > 100 ? backToTopBtn.classList.add('visible') : backToTopBtn.classList.remove('visible');
+
+        if (scrolled < totalHeight - nearBottom && totalHeight > window.innerHeight + 200) {
+            scrollToBottomBtn.classList.add('visible');
+        } else {
+            scrollToBottomBtn.classList.remove('visible');
+        }
+    }
+    window.addEventListener('scroll', updateFloatButtons);
+    window.addEventListener('load', updateFloatButtons);
+    window.addEventListener('resize', updateFloatButtons);
+
+    backToTopBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+    scrollToBottomBtn.addEventListener('click', () => window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' }));
+</script>
+</body>
+</html>
